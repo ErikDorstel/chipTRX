@@ -9,7 +9,7 @@ void doTone(int cycles,int duration) {
 
 void setup() {
   trx.begin(144.5,144.5);
-  trx.setPTT(true);
+  trx.setPTT(true,false);
   doTone(50,100);
   trx.setPTT(false); }
 
