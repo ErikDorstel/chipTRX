@@ -24,6 +24,11 @@ class DRA818V {
       if (sleep) { digitalWrite(SleepIO,LOW); Serial.println("Sleep Mode: On"); }
       else { digitalWrite(SleepIO,HIGH); Serial.println("Sleep Mode: Off"); } }
 
+    bool getSquelch() {
+      static bool squelch=true; if (digitalRead(SquelchIO)!=squelch) {
+        if (digitalRead(SquelchIO)) { Serial.println("Squelch: Closed"); squelch=true; }
+        else { Serial.println("Squelch: Open"); squelch=false; } } return squelch; }
+
 void connect() {
       send("DMOCONNECT","DMOCONNECT:0"); }
 
@@ -41,6 +46,6 @@ void connect() {
       pinMode(SquelchIO,INPUT);
       pinMode(PTTIO,OUTPUT); pinMode(SleepIO,OUTPUT); pinMode(BoostIO,OUTPUT);
       pinMode(analogOut,OUTPUT); pinMode(analogIn,INPUT);
-      setPTT(); setSleep();
+      setPTT(); setSleep(); getSquelch();
       Serial2.begin(9600,SERIAL_8N1,UARTRX,UARTTX);
       connect(); setVolume(); setFilter(); setGroup(txFreq,rxFreq); } };

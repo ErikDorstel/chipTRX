@@ -13,4 +13,4 @@ void setup() {
   doTone(50,100);
   trx.setPTT(false); }
 
-void loop() {}
+void loop() { trx.getSquelch(); }
