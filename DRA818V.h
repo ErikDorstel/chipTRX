@@ -18,7 +18,7 @@ class DRA818V {
       if (ptt) {
         if (boost) { digitalWrite(BoostIO,LOW); digitalWrite(PTTIO,LOW); Serial.println("PTT: TX 1W"); }
         else { digitalWrite(BoostIO,HIGH); digitalWrite(PTTIO,LOW); Serial.println("PTT: TX 0.5W"); } }
-      else { digitalWrite(PTTIO,HIGH); digitalWrite(BoostIO,LOW); Serial.println("PTT: RX"); } }
+      else { digitalWrite(PTTIO,HIGH); digitalWrite(BoostIO,HIGH); Serial.println("PTT: RX"); } }
 
     void setSleep(bool sleep=false) {
       if (sleep) { digitalWrite(SleepIO,LOW); Serial.println("Sleep Mode: On"); }
