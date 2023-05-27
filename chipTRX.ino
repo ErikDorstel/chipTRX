@@ -13,4 +13,4 @@ void setup() {
   doTone(50,100);
   trx.setPTT(false); }
 
-void loop() { trx.getSquelch(); }
+void loop() { trx.getSquelch(); trx.getAudioLevel(); }

@@ -29,7 +29,14 @@ class DRA818V {
         if (digitalRead(SquelchIO)) { Serial.println("Squelch: Closed"); squelch=true; }
         else { Serial.println("Squelch: Open"); squelch=false; } } return squelch; }
 
-void connect() {
+    void getAudioLevel() {
+      static int minLevel=10000; static int maxLevel=0; static uint32_t levelTimer=millis()+5000;
+      int level=analogRead(analogIn); minLevel=level<minLevel?level:minLevel; maxLevel=level>maxLevel?level:maxLevel;
+      if (millis()>=levelTimer) { levelTimer=millis()+5000;
+        Serial.println("Audio Level: min " + String(minLevel) + " - max " + String(maxLevel));
+        minLevel=10000; maxLevel=0; } }
+
+    void connect() {
       send("DMOCONNECT","DMOCONNECT:0"); }
 
     void setVolume(uint8_t volume=4) {
@@ -45,7 +52,7 @@ void connect() {
       Serial.begin(115200);
       pinMode(SquelchIO,INPUT);
       pinMode(PTTIO,OUTPUT); pinMode(SleepIO,OUTPUT); pinMode(BoostIO,OUTPUT);
-      pinMode(analogOut,OUTPUT); pinMode(analogIn,INPUT);
+      pinMode(analogOut,OUTPUT); pinMode(analogIn,INPUT); analogSetPinAttenuation(analogIn,ADC_0db); analogReadResolution(12);
       setPTT(); setSleep(); getSquelch();
       Serial2.begin(9600,SERIAL_8N1,UARTRX,UARTTX);
       connect(); setVolume(); setFilter(); setGroup(txFreq,rxFreq); } };
