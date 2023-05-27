@@ -16,6 +16,6 @@ ESP32 and DRA818V based VHF transceiver
 * GPIO 25 - analogOut
 * GPIO 32 - analogIn
 #### Development Hardware
-![IMAGE ALT TEXT HERE](https://www.dorstel.de/github/chipTRX_v1.0.png)
+![IMAGE ALT TEXT HERE](https://www.dorstel.de/github/chipTRX_v1.1.png)
 #### Schematic
 ![IMAGE ALT TEXT HERE](documentation/DRA818V.png)
